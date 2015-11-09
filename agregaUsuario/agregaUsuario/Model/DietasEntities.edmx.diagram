@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ddee4ab188ce43bbab00c9de22a66040" Name="Diagram1">
+        <EntityTypeShape EntityType="sistema_dietaModel.cliente" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_dietaModel.dieta" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_dietaModel.direccion" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_dietaModel.materia_prima" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_dietaModel.necesidad_fisiologica" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_dietaModel.tipo_animal" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_dietaModel.dieta_materia" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
+        <AssociationConnector Association="sistema_dietaModel.FK_Cliente_Direccion" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_dietaModel.FK_Dieta_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_dietaModel.FK_MateriaPrima_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_dietaModel.FK_Dieta_TipoAnimal" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_dietaModel.FK_DietaMateria_Dieta" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_dietaModel.FK_DietaMateria_Materia" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_dietaModel.FK_TipoAnimal_Necesidad" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

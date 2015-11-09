@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="658fe0d617d84711b67041e5f395e603" Name="Diagram1">
+        <EntityTypeShape EntityType="encalientesdbModel.Card" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.CardType" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.CodeNumberConfirmed" Width="1.5" PointX="6.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.Device" Width="1.5" PointX="1.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.Ingredient" Width="1.5" PointX="9.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.IngredientGroup" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.Location" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.MenuItem" Width="1.5" PointX="5.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.MenuItemType" Width="1.5" PointX="10.5" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.Order" Width="1.5" PointX="7.5" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.OrderMenuItem" Width="1.5" PointX="12.75" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.OrderState" Width="1.5" PointX="5.25" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.PaymentType" Width="1.5" PointX="5.25" PointY="27.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.PriceLocationMenuItem" Width="1.5" PointX="7.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.PrivilegeSet" Width="1.5" PointX="1.5" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.Promotion" Width="1.5" PointX="10.5" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.PromotionCode" Width="1.5" PointX="12.75" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.Reservation" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.Restaurant" Width="1.5" PointX="0.75" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.Session" Width="1.5" PointX="4" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.ShippingPolygon" Width="1.5" PointX="5.25" PointY="37.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.ShippingPolygonPoint" Width="1.5" PointX="7.5" PointY="37.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.ShippingType" Width="1.5" PointX="5.25" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.Tag" Width="1.5" PointX="3" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.TypeCode" Width="1.5" PointX="8.25" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.TypePromotion" Width="1.5" PointX="6" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.User" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.UserAddress" Width="1.5" PointX="5.25" PointY="41.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="encalientesdbModel.UserRate" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <AssociationConnector Association="encalientesdbModel.FK_Card_CardType" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Card_User" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Order_Card" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_CodeNumberConfirmed_Session" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Session_Device" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Ingredient_IngredientGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_IngredientGroup_MenuItem" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Location_Restaurant" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Order_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_PriceLocationMenuItem_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Reservation_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_ShippingPolygon_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_MenuItem_Restaurant" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_OrderMenuItem_MenuItem" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_PriceLocationMenuItem_MenuItem" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_MenuItemType_Restaurant" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Order_OrderStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Order_PaymentType" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Order_Reservation" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Order_ShippingType" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Order_User" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Order_UserAddress" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_OrderMenuItem_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_OrderMenuItem_PromoCode" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_User_PrivilegeSet" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Promotion_Restaurant" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Promotion_TypeCode" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.PromotionCode_Promotion" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Reservation_User" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_UserRates_Restaurant" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_Session_User" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_ShippingPolygonPoint_ShippingPolygon" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_TypeCode_TypePromotion" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_UserAddress_User" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.FK_UserRates_User" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.MenuItemLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.MenuItemTypeMenuItem" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.PromotionLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.PromotionMenuItem" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.LocationPaymentType" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.OrderMenuItemIngredient" ManuallyRouted="false" />
+        <AssociationConnector Association="encalientesdbModel.RestaurantTag" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

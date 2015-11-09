@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ParkeatedbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Banner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageURL" Type="text" Nullable="false" />
+          <Property Name="RedirectURL" Type="text" />
+        </EntityType>
+        <EntityType Name="BannerShow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Token" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateClicked" Type="datetime" Precision="0" />
+          <Property Name="IdBanner" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CheckIn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdParkingLot" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="IsOpen" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParkingLot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Address" Type="text" Nullable="false" />
+          <Property Name="Longitude" Type="double" Nullable="false" />
+          <Property Name="Latitude" Type="double" Nullable="false" />
+          <Property Name="Price" Type="double" Nullable="false" />
+          <Property Name="Times" Type="text" Nullable="false" />
+          <Property Name="Ranking" Type="int" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="DateLastEdited" Type="datetime" Precision="0" />
+          <Property Name="Telephone" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="text" Nullable="false" />
+          <Property Name="Password" Type="text" Nullable="false" />
+          <Property Name="Mail" Type="text" />
+          <Property Name="IdTypeUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="text" Nullable="false" />
+          <Property Name="CreateParkingLot" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BannerShow_Banner">
+          <End Role="Banner" Type="Self.Banner" Multiplicity="1" />
+          <End Role="BannerShow" Type="Self.BannerShow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BannerShow">
+              <PropertyRef Name="IdBanner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CheckIn_ParkingLot">
+          <End Role="ParkingLot" Type="Self.ParkingLot" Multiplicity="1" />
+          <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingLot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CheckIn">
+              <PropertyRef Name="IdParkingLot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_TypeUser">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdTypeUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ParkeatedbModelStoreContainer">
+          <EntitySet Name="Banner" EntityType="Self.Banner" Schema="parkeatedb" store:Type="Tables" />
+          <EntitySet Name="BannerShow" EntityType="Self.BannerShow" Schema="parkeatedb" store:Type="Tables" />
+          <EntitySet Name="CheckIn" EntityType="Self.CheckIn" Schema="parkeatedb" store:Type="Tables" />
+          <EntitySet Name="ParkingLot" EntityType="Self.ParkingLot" Schema="parkeatedb" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="parkeatedb" store:Type="Tables" />
+          <EntitySet Name="UserType" EntityType="Self.UserType" Schema="parkeatedb" store:Type="Tables" />
+          <AssociationSet Name="FK_BannerShow_Banner" Association="Self.FK_BannerShow_Banner">
+            <End Role="Banner" EntitySet="Banner" />
+            <End Role="BannerShow" EntitySet="BannerShow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CheckIn_ParkingLot" Association="Self.FK_CheckIn_ParkingLot">
+            <End Role="ParkingLot" EntitySet="ParkingLot" />
+            <End Role="CheckIn" EntitySet="CheckIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_TypeUser" Association="Self.FK_User_TypeUser">
+            <End Role="UserType" EntitySet="UserType" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ParkeatedbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Banner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageURL" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RedirectURL" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BannerShow" Relationship="Self.FK_BannerShow_Banner" FromRole="Banner" ToRole="BannerShow" />
+        </EntityType>
+        <EntityType Name="BannerShow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateClicked" Type="DateTime" />
+          <Property Name="IdBanner" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Banner" Relationship="Self.FK_BannerShow_Banner" FromRole="BannerShow" ToRole="Banner" />
+        </EntityType>
+        <EntityType Name="CheckIn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdParkingLot" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="IsOpen" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ParkingLot" Relationship="Self.FK_CheckIn_ParkingLot" FromRole="CheckIn" ToRole="ParkingLot" />
+        </EntityType>
+        <EntityType Name="ParkingLot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Times" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ranking" Type="Int32" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateLastEdited" Type="DateTime" />
+          <Property Name="Telephone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CheckIn" Relationship="Self.FK_CheckIn_ParkingLot" FromRole="ParkingLot" ToRole="CheckIn" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mail" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="IdTypeUser" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserType" Relationship="Self.FK_User_TypeUser" FromRole="User" ToRole="UserType" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateParkingLot" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_TypeUser" FromRole="UserType" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_BannerShow_Banner">
+          <End Role="Banner" Type="Self.Banner" Multiplicity="1" />
+          <End Role="BannerShow" Type="Self.BannerShow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BannerShow">
+              <PropertyRef Name="IdBanner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CheckIn_ParkingLot">
+          <End Role="ParkingLot" Type="Self.ParkingLot" Multiplicity="1" />
+          <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingLot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CheckIn">
+              <PropertyRef Name="IdParkingLot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_TypeUser">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdTypeUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ParkeatedbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Banner" EntityType="Self.Banner" />
+          <EntitySet Name="BannerShow" EntityType="Self.BannerShow" />
+          <EntitySet Name="CheckIn" EntityType="Self.CheckIn" />
+          <EntitySet Name="ParkingLot" EntityType="Self.ParkingLot" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="UserType" EntityType="Self.UserType" />
+          <AssociationSet Name="FK_BannerShow_Banner" Association="Self.FK_BannerShow_Banner">
+            <End Role="Banner" EntitySet="Banner" />
+            <End Role="BannerShow" EntitySet="BannerShow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CheckIn_ParkingLot" Association="Self.FK_CheckIn_ParkingLot">
+            <End Role="ParkingLot" EntitySet="ParkingLot" />
+            <End Role="CheckIn" EntitySet="CheckIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_TypeUser" Association="Self.FK_User_TypeUser">
+            <End Role="UserType" EntitySet="UserType" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ParkeatedbModelStoreContainer" CdmEntityContainer="ParkeatedbEntities">
+          <EntitySetMapping Name="Banner">
+            <EntityTypeMapping TypeName="ParkeatedbModel.Banner">
+              <MappingFragment StoreEntitySet="Banner">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="RedirectURL" ColumnName="RedirectURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BannerShow">
+            <EntityTypeMapping TypeName="ParkeatedbModel.BannerShow">
+              <MappingFragment StoreEntitySet="BannerShow">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="DateClicked" ColumnName="DateClicked" />
+                <ScalarProperty Name="IdBanner" ColumnName="IdBanner" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CheckIn">
+            <EntityTypeMapping TypeName="ParkeatedbModel.CheckIn">
+              <MappingFragment StoreEntitySet="CheckIn">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdParkingLot" ColumnName="IdParkingLot" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsOpen" ColumnName="IsOpen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParkingLot">
+            <EntityTypeMapping TypeName="ParkeatedbModel.ParkingLot">
+              <MappingFragment StoreEntitySet="ParkingLot">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Times" ColumnName="Times" />
+                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateLastEdited" ColumnName="DateLastEdited" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="ParkeatedbModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="IdTypeUser" ColumnName="IdTypeUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserType">
+            <EntityTypeMapping TypeName="ParkeatedbModel.UserType">
+              <MappingFragment StoreEntitySet="UserType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreateParkingLot" ColumnName="CreateParkingLot" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

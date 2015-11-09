@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="sistema_dietaModelStoreContainer" CdmEntityContainer="sistema_dietaEntities">
+    <EntitySetMapping Name="clientes">
+      <EntityTypeMapping TypeName="sistema_dietaModel.cliente">
+        <MappingFragment StoreEntitySet="cliente">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="IdDireccion" ColumnName="IdDireccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dietas">
+      <EntityTypeMapping TypeName="sistema_dietaModel.dieta">
+        <MappingFragment StoreEntitySet="dieta">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="IdTipoAnimal" ColumnName="IdTipoAnimal" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="FechaExpiracion" ColumnName="FechaExpiracion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="direccions">
+      <EntityTypeMapping TypeName="sistema_dietaModel.direccion">
+        <MappingFragment StoreEntitySet="direccion">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Direccion1" ColumnName="Direccion" />
+          <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="CP" ColumnName="CP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="materia_prima">
+      <EntityTypeMapping TypeName="sistema_dietaModel.materia_prima">
+        <MappingFragment StoreEntitySet="materia_prima">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClaveServidor" ColumnName="ClaveServidor" />
+          <ScalarProperty Name="IsServerVersion" ColumnName="IsServerVersion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Fosforo" ColumnName="Fosforo" />
+          <ScalarProperty Name="MateriaGrasa" ColumnName="MateriaGrasa" />
+          <ScalarProperty Name="CenizaBruta" ColumnName="CenizaBruta" />
+          <ScalarProperty Name="FibraBruta" ColumnName="FibraBruta" />
+          <ScalarProperty Name="ProteinaBruta" ColumnName="ProteinaBruta" />
+          <ScalarProperty Name="MateriaSeca" ColumnName="MateriaSeca" />
+          <ScalarProperty Name="FND" ColumnName="FND" />
+          <ScalarProperty Name="FAD" ColumnName="FAD" />
+          <ScalarProperty Name="LAD" ColumnName="LAD" />
+          <ScalarProperty Name="Calcio" ColumnName="Calcio" />
+          <ScalarProperty Name="ParedVegetal" ColumnName="ParedVegetal" />
+          <ScalarProperty Name="Azucares" ColumnName="Azucares" />
+          <ScalarProperty Name="CenizasInsolubles" ColumnName="CenizasInsolubles" />
+          <ScalarProperty Name="Almidon" ColumnName="Almidon" />
+          <ScalarProperty Name="EnergiaBruta" ColumnName="EnergiaBruta" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="necesidad_fisiologica">
+      <EntityTypeMapping TypeName="sistema_dietaModel.necesidad_fisiologica">
+        <MappingFragment StoreEntitySet="necesidad_fisiologica">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VitaminaD" ColumnName="VitaminaD" />
+          <ScalarProperty Name="VitaminaA" ColumnName="VitaminaA" />
+          <ScalarProperty Name="VitaminaE" ColumnName="VitaminaE" />
+          <ScalarProperty Name="P" ColumnName="P" />
+          <ScalarProperty Name="EM" ColumnName="EM" />
+          <ScalarProperty Name="Ca" ColumnName="Ca" />
+          <ScalarProperty Name="Na" ColumnName="Na" />
+          <ScalarProperty Name="Mg" ColumnName="Mg" />
+          <ScalarProperty Name="PM" ColumnName="PM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipo_animal">
+      <EntityTypeMapping TypeName="sistema_dietaModel.tipo_animal">
+        <MappingFragment StoreEntitySet="tipo_animal">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClaveServidor" ColumnName="ClaveServidor" />
+          <ScalarProperty Name="IdNecesidad" ColumnName="IdNecesidad" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Peso" ColumnName="Peso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dieta_materia">
+      <EntityTypeMapping TypeName="sistema_dietaModel.dieta_materia">
+        <MappingFragment StoreEntitySet="dieta_materia">
+          <ScalarProperty Name="IdDieta" ColumnName="IdDieta" />
+          <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

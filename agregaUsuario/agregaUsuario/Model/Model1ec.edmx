@@ -1,0 +1,2823 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="encalientesdbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCardType" Type="int" />
+          <Property Name="LastDigits" Type="varchar" MaxLength="4" />
+          <Property Name="Token" Type="varchar" MaxLength="45" />
+          <Property Name="IdUser" Type="int" />
+          <Property Name="Enabled" Type="bit" />
+        </EntityType>
+        <EntityType Name="CardType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="CodeNumberConfirmed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="SessionId" Type="int" Nullable="false" />
+          <Property Name="ExpirationDate" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppVersion" Type="varchar" MaxLength="500" />
+          <Property Name="OS" Type="varchar" MaxLength="45" />
+          <Property Name="NotificationToken" Type="text" />
+        </EntityType>
+        <EntityType Name="Ingredient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdIngredientGroup" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="double" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Image" Type="varchar" MaxLength="145" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IngredientGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMenuItem" Type="int" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationName" Type="char" MaxLength="200" Nullable="false" />
+          <Property Name="IdRestaurant" Type="int" Nullable="false" />
+          <Property Name="Telephone" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="Telephone2" Type="char" MaxLength="20" />
+          <Property Name="Telephone3" Type="char" MaxLength="20" />
+          <Property Name="ContactName" Type="char" MaxLength="100" />
+          <Property Name="ContactName2" Type="char" MaxLength="100" />
+          <Property Name="Email" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="Email2" Type="char" MaxLength="100" />
+          <Property Name="Address" Type="char" MaxLength="200" />
+          <Property Name="Image" Type="char" MaxLength="200" Nullable="false" />
+          <Property Name="Times" Type="char" MaxLength="200" />
+          <Property Name="EstimatedTime" Type="int" Nullable="false" />
+          <Property Name="ReservationTimes" Type="char" MaxLength="200" />
+          <Property Name="SendTimes" Type="char" MaxLength="200" />
+          <Property Name="Latitude" Type="decimal" Precision="25" Scale="20" Nullable="false" />
+          <Property Name="Longitude" Type="decimal" Precision="25" Scale="20" Nullable="false" />
+          <Property Name="AllowsReservation" Type="bit" Nullable="false" />
+          <Property Name="AllowsSending" Type="bit" Nullable="false" />
+          <Property Name="AllowsPickup" Type="bit" Nullable="false" />
+          <Property Name="AllowsEatHere" Type="bit" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="MinimumCost" Type="double" Nullable="false" />
+          <Property Name="ShippingCost" Type="double" />
+          <Property Name="PickupTimes" Type="varchar" MaxLength="200" />
+          <Property Name="MaximunReservation" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.encalientesdb.LocationPaymentType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="LocationPaymentType">
+          <Key>
+            <PropertyRef Name="IdLocation" />
+            <PropertyRef Name="IdPaymentType" />
+          </Key>
+          <Property Name="IdLocation" Type="int" Nullable="false" />
+          <Property Name="IdPaymentType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="text" Nullable="false" />
+          <Property Name="IdRestaurant" Type="int" Nullable="false" />
+          <Property Name="Image" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="Icon" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Price" Type="double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuItemLocation">
+          <Key>
+            <PropertyRef Name="IdMenuItem" />
+            <PropertyRef Name="IdLocation" />
+          </Key>
+          <Property Name="IdMenuItem" Type="int" Nullable="false" />
+          <Property Name="IdLocation" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuItemType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="IdRestaurant" Type="int" Nullable="false" />
+          <Property Name="Priority" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuItemTypeMenuItem">
+          <Key>
+            <PropertyRef Name="IdMenuItemType" />
+            <PropertyRef Name="IdMenuItem" />
+          </Key>
+          <Property Name="IdMenuItemType" Type="int" Nullable="false" />
+          <Property Name="IdMenuItem" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdLocation" Type="int" Nullable="false" />
+          <Property Name="IdUser" Type="int" />
+          <Property Name="IdOrderStatus" Type="int" Nullable="false" />
+          <Property Name="IdPaymentType" Type="int" Nullable="false" />
+          <Property Name="Description" Type="text" Nullable="false" />
+          <Property Name="Total" Type="double" Nullable="false" />
+          <Property Name="IdCard" Type="int" />
+          <Property Name="BillDescription" Type="varchar" MaxLength="150" />
+          <Property Name="Date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="SendingTime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="EstimatedTime" Type="int" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="ShippingTypeId" Type="int" Nullable="false" />
+          <Property Name="UserAddressId" Type="int" />
+          <Property Name="ReservationId" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderMenuItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdOrder" Type="int" Nullable="false" />
+          <Property Name="IdMenuItem" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="IdPromoCode" Type="int" />
+          <Property Name="Total" Type="double" Nullable="false" />
+          <Property Name="Enabled" Type="bool" Nullable="false" />
+          <Property Name="Note" Type="text" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.encalientesdb.OrderMenuItemIngredient' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OrderMenuItemIngredient">
+          <Key>
+            <PropertyRef Name="IdOrderMenuItem" />
+            <PropertyRef Name="IdIngredient" />
+          </Key>
+          <Property Name="IdOrderMenuItem" Type="int" Nullable="false" />
+          <Property Name="IdIngredient" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="Description" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PriceLocationMenuItem">
+          <Key>
+            <PropertyRef Name="IdLocation" />
+            <PropertyRef Name="IdMenuItem" />
+          </Key>
+          <Property Name="IdLocation" Type="int" Nullable="false" />
+          <Property Name="IdMenuItem" Type="int" Nullable="false" />
+          <Property Name="Price" Type="double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrivilegeSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="ViewOrder" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdRestaurant" Type="int" Nullable="false" />
+          <Property Name="Description" Type="char" MaxLength="200" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Days" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Priority" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PromotionCode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPromotion" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Erasable" Type="bit" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PromotionLocation">
+          <Key>
+            <PropertyRef Name="IdLocation" />
+            <PropertyRef Name="IdPromotion" />
+          </Key>
+          <Property Name="IdLocation" Type="int" Nullable="false" />
+          <Property Name="IdPromotion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PromotionMenuItem">
+          <Key>
+            <PropertyRef Name="idPromotion" />
+            <PropertyRef Name="idMenuItem" />
+          </Key>
+          <Property Name="idPromotion" Type="int" Nullable="false" />
+          <Property Name="idMenuItem" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdLocation" Type="int" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="PartySize" Type="int" Nullable="false" />
+          <Property Name="Description" Type="char" MaxLength="200" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Note" Type="text" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rank" Type="int" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="char" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="Email2" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="ContactName" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="Telephone" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="Telephone2" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="Image" Type="char" MaxLength="200" Nullable="false" />
+          <Property Name="Hash" Type="int" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.encalientesdb.RestaurantTag' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RestaurantTag">
+          <Key>
+            <PropertyRef Name="IdRestaurant" />
+            <PropertyRef Name="IdTag" />
+          </Key>
+          <Property Name="IdRestaurant" Type="int" Nullable="false" />
+          <Property Name="IdTag" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="ExpirationTime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="AppVersion" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="Token" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="FacebookToken" Type="varchar" MaxLength="45" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="DeviceId" Type="int" />
+        </EntityType>
+        <EntityType Name="ShippingPolygon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdLocation" Type="int" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="char" MaxLength="200" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Cost" Type="double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShippingPolygonPoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdShippingPolygon" Type="int" Nullable="false" />
+          <Property Name="ListIndex" Type="int" Nullable="false" />
+          <Property Name="Latitude" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="Longitude" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShippingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Description" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="Description" Type="char" MaxLength="200" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeCode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypePromotionId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypePromotion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Description" Type="text" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUserType" Type="int" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="Email2" Type="char" MaxLength="100" />
+          <Property Name="Image" Type="text" />
+          <Property Name="Type" Type="char" MaxLength="2" />
+          <Property Name="Alias" Type="char" MaxLength="100" />
+          <Property Name="Password" Type="char" MaxLength="100" />
+          <Property Name="CellPhone" Type="char" MaxLength="20" />
+          <Property Name="Telephone" Type="char" MaxLength="20" />
+          <Property Name="Telephone2" Type="char" MaxLength="20" />
+          <Property Name="ForeignUserName" Type="char" MaxLength="100" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="PrivilegeSetId" Type="int" Nullable="false" />
+          <Property Name="IdConekta" Type="varchar" MaxLength="100" />
+          <Property Name="BornDate" Type="datetime" Precision="0" />
+          <Property Name="CellphoneConfirmed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUser" Type="int" />
+          <Property Name="Description" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="Zipcode" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="City" Type="char" MaxLength="30" />
+          <Property Name="State" Type="char" MaxLength="30" />
+          <Property Name="Latitude" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="Longitude" Type="decimal" Precision="25" Scale="20" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Number" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="AptNumber" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="UserRates">
+          <Key>
+            <PropertyRef Name="IdUser" />
+            <PropertyRef Name="IdRestaurant" />
+          </Key>
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="IdRestaurant" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Card_CardType">
+          <End Role="CardType" Type="Self.CardType" Multiplicity="0..1" />
+          <End Role="Card" Type="Self.Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="IdCardType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Card_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Card" Type="Self.Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CodeNumberConfirmed_Session">
+          <End Role="Session" Type="Self.Session" Multiplicity="1" />
+          <End Role="CodeNumberConfirmed" Type="Self.CodeNumberConfirmed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CodeNumberConfirmed">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingredient_IngredientGroup">
+          <End Role="IngredientGroup" Type="Self.IngredientGroup" Multiplicity="1" />
+          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IngredientGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ingredient">
+              <PropertyRef Name="IdIngredientGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IngredientGroup_MenuItem">
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="1" />
+          <End Role="IngredientGroup" Type="Self.IngredientGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IngredientGroup">
+              <PropertyRef Name="IdMenuItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Location" Type="Self.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="IdRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationPaymentType_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="LocationPaymentType" Type="Self.LocationPaymentType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LocationPaymentType">
+              <PropertyRef Name="IdLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationPaymentType_PaymentType">
+          <End Role="PaymentType" Type="Self.PaymentType" Multiplicity="1" />
+          <End Role="LocationPaymentType" Type="Self.LocationPaymentType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LocationPaymentType">
+              <PropertyRef Name="IdPaymentType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItem_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItem">
+              <PropertyRef Name="IdRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItemLocation_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="MenuItemLocation" Type="Self.MenuItemLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItemLocation">
+              <PropertyRef Name="IdLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItemLocation_MenuItem">
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="1" />
+          <End Role="MenuItemLocation" Type="Self.MenuItemLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItemLocation">
+              <PropertyRef Name="IdMenuItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItemType_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="MenuItemType" Type="Self.MenuItemType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItemType">
+              <PropertyRef Name="IdRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItemTypeMenuItem_MenuItem">
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="1" />
+          <End Role="MenuItemTypeMenuItem" Type="Self.MenuItemTypeMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItemTypeMenuItem">
+              <PropertyRef Name="IdMenuItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItemTypeMenuItem_MenuItemType">
+          <End Role="MenuItemType" Type="Self.MenuItemType" Multiplicity="1" />
+          <End Role="MenuItemTypeMenuItem" Type="Self.MenuItemTypeMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItemType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItemTypeMenuItem">
+              <PropertyRef Name="IdMenuItemType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Card">
+          <End Role="Card" Type="Self.Card" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Card">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdCard" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_OrderStatus">
+          <End Role="OrderState" Type="Self.OrderState" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdOrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_PaymentType">
+          <End Role="PaymentType" Type="Self.PaymentType" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdPaymentType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Reservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ReservationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ShippingType">
+          <End Role="ShippingType" Type="Self.ShippingType" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippingType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ShippingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_UserAddress">
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAddress">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="UserAddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMenuItem_MenuItem">
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="1" />
+          <End Role="OrderMenuItem" Type="Self.OrderMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderMenuItem">
+              <PropertyRef Name="IdMenuItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMenuItem_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderMenuItem" Type="Self.OrderMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderMenuItem">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMenuItem_PromoCode">
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
+          <End Role="OrderMenuItem" Type="Self.OrderMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderMenuItem">
+              <PropertyRef Name="IdPromoCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMenuItemIngredient_Ingredient">
+          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="1" />
+          <End Role="OrderMenuItemIngredient" Type="Self.OrderMenuItemIngredient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderMenuItemIngredient">
+              <PropertyRef Name="IdIngredient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMenuItemIngredient_OrderMenuItem">
+          <End Role="OrderMenuItem" Type="Self.OrderMenuItem" Multiplicity="1" />
+          <End Role="OrderMenuItemIngredient" Type="Self.OrderMenuItemIngredient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderMenuItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderMenuItemIngredient">
+              <PropertyRef Name="IdOrderMenuItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PriceLocationMenuItem_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="PriceLocationMenuItem" Type="Self.PriceLocationMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PriceLocationMenuItem">
+              <PropertyRef Name="IdLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PriceLocationMenuItem_MenuItem">
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="1" />
+          <End Role="PriceLocationMenuItem" Type="Self.PriceLocationMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PriceLocationMenuItem">
+              <PropertyRef Name="IdMenuItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promotion_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Promotion">
+              <PropertyRef Name="IdRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promotion_TypeCode">
+          <End Role="TypeCode" Type="Self.TypeCode" Multiplicity="1" />
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeCode">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Promotion">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RestaurantTag_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="RestaurantTag" Type="Self.RestaurantTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RestaurantTag">
+              <PropertyRef Name="IdRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RestaurantTag_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="RestaurantTag" Type="Self.RestaurantTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RestaurantTag">
+              <PropertyRef Name="IdTag" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Session_Device">
+          <End Role="Device" Type="Self.Device" Multiplicity="0..1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="DeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Session_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShippingPolygon_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="ShippingPolygon" Type="Self.ShippingPolygon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShippingPolygon">
+              <PropertyRef Name="IdLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShippingPolygonPoint_ShippingPolygon">
+          <End Role="ShippingPolygon" Type="Self.ShippingPolygon" Multiplicity="1" />
+          <End Role="ShippingPolygonPoint" Type="Self.ShippingPolygonPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippingPolygon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShippingPolygonPoint">
+              <PropertyRef Name="IdShippingPolygon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeCode_TypePromotion">
+          <End Role="TypePromotion" Type="Self.TypePromotion" Multiplicity="1" />
+          <End Role="TypeCode" Type="Self.TypeCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypePromotion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TypeCode">
+              <PropertyRef Name="TypePromotionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_PrivilegeSet">
+          <End Role="PrivilegeSet" Type="Self.PrivilegeSet" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PrivilegeSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="PrivilegeSetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAddress_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAddress">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRates_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="UserRates" Type="Self.UserRates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRates">
+              <PropertyRef Name="IdRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRates_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRates" Type="Self.UserRates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRates">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IdLocation">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="PromotionLocation" Type="Self.PromotionLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PromotionLocation">
+              <PropertyRef Name="IdLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IdPromotion">
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="1" />
+          <End Role="PromotionLocation" Type="Self.PromotionLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PromotionLocation">
+              <PropertyRef Name="IdPromotion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PromotionCode_Promotion">
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="1" />
+          <End Role="PromotionCode" Type="Self.PromotionCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PromotionCode">
+              <PropertyRef Name="IdPromotion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PromotionMenuItem_MenuItem">
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="1" />
+          <End Role="PromotionMenuItem" Type="Self.PromotionMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PromotionMenuItem">
+              <PropertyRef Name="idMenuItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PromotionMenuItem_Promotion">
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="1" />
+          <End Role="PromotionMenuItem" Type="Self.PromotionMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PromotionMenuItem">
+              <PropertyRef Name="idPromotion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="encalientesdbModelStoreContainer">
+          <EntitySet Name="Card" EntityType="Self.Card" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="CardType" EntityType="Self.CardType" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="CodeNumberConfirmed" EntityType="Self.CodeNumberConfirmed" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="Device" EntityType="Self.Device" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="Ingredient" EntityType="Self.Ingredient" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="IngredientGroup" EntityType="Self.IngredientGroup" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="MenuItem" EntityType="Self.MenuItem" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="MenuItemLocation" EntityType="Self.MenuItemLocation" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="MenuItemType" EntityType="Self.MenuItemType" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="MenuItemTypeMenuItem" EntityType="Self.MenuItemTypeMenuItem" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="OrderMenuItem" EntityType="Self.OrderMenuItem" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="OrderState" EntityType="Self.OrderState" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="PaymentType" EntityType="Self.PaymentType" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="PriceLocationMenuItem" EntityType="Self.PriceLocationMenuItem" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="PrivilegeSet" EntityType="Self.PrivilegeSet" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="PromotionCode" EntityType="Self.PromotionCode" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="PromotionLocation" EntityType="Self.PromotionLocation" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="PromotionMenuItem" EntityType="Self.PromotionMenuItem" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="Session" EntityType="Self.Session" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="ShippingPolygon" EntityType="Self.ShippingPolygon" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="ShippingPolygonPoint" EntityType="Self.ShippingPolygonPoint" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="ShippingType" EntityType="Self.ShippingType" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="TypeCode" EntityType="Self.TypeCode" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="TypePromotion" EntityType="Self.TypePromotion" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="UserAddress" EntityType="Self.UserAddress" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="UserRates" EntityType="Self.UserRates" Schema="encalientesdb" store:Type="Tables" />
+          <EntitySet Name="LocationPaymentType" EntityType="Self.LocationPaymentType" store:Type="Tables" store:Schema="encalientesdb">
+            <DefiningQuery>SELECT
+`LocationPaymentType`.`IdLocation`, 
+`LocationPaymentType`.`IdPaymentType`
+FROM `LocationPaymentType` AS `LocationPaymentType`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OrderMenuItemIngredient" EntityType="Self.OrderMenuItemIngredient" store:Type="Tables" store:Schema="encalientesdb">
+            <DefiningQuery>SELECT
+`OrderMenuItemIngredient`.`IdOrderMenuItem`, 
+`OrderMenuItemIngredient`.`IdIngredient`
+FROM `OrderMenuItemIngredient` AS `OrderMenuItemIngredient`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RestaurantTag" EntityType="Self.RestaurantTag" store:Type="Tables" store:Schema="encalientesdb">
+            <DefiningQuery>SELECT
+`RestaurantTag`.`IdRestaurant`, 
+`RestaurantTag`.`IdTag`
+FROM `RestaurantTag` AS `RestaurantTag`</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Card_CardType" Association="Self.FK_Card_CardType">
+            <End Role="CardType" EntitySet="CardType" />
+            <End Role="Card" EntitySet="Card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Card_User" Association="Self.FK_Card_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Card" EntitySet="Card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CodeNumberConfirmed_Session" Association="Self.FK_CodeNumberConfirmed_Session">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="CodeNumberConfirmed" EntitySet="CodeNumberConfirmed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingredient_IngredientGroup" Association="Self.FK_Ingredient_IngredientGroup">
+            <End Role="IngredientGroup" EntitySet="IngredientGroup" />
+            <End Role="Ingredient" EntitySet="Ingredient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IngredientGroup_MenuItem" Association="Self.FK_IngredientGroup_MenuItem">
+            <End Role="MenuItem" EntitySet="MenuItem" />
+            <End Role="IngredientGroup" EntitySet="IngredientGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_Restaurant" Association="Self.FK_Location_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="Location" EntitySet="Location" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationPaymentType_Location" Association="Self.FK_LocationPaymentType_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="LocationPaymentType" EntitySet="LocationPaymentType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationPaymentType_PaymentType" Association="Self.FK_LocationPaymentType_PaymentType">
+            <End Role="PaymentType" EntitySet="PaymentType" />
+            <End Role="LocationPaymentType" EntitySet="LocationPaymentType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItem_Restaurant" Association="Self.FK_MenuItem_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="MenuItem" EntitySet="MenuItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItemLocation_Location" Association="Self.FK_MenuItemLocation_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="MenuItemLocation" EntitySet="MenuItemLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItemLocation_MenuItem" Association="Self.FK_MenuItemLocation_MenuItem">
+            <End Role="MenuItem" EntitySet="MenuItem" />
+            <End Role="MenuItemLocation" EntitySet="MenuItemLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItemType_Restaurant" Association="Self.FK_MenuItemType_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="MenuItemType" EntitySet="MenuItemType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItemTypeMenuItem_MenuItem" Association="Self.FK_MenuItemTypeMenuItem_MenuItem">
+            <End Role="MenuItem" EntitySet="MenuItem" />
+            <End Role="MenuItemTypeMenuItem" EntitySet="MenuItemTypeMenuItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItemTypeMenuItem_MenuItemType" Association="Self.FK_MenuItemTypeMenuItem_MenuItemType">
+            <End Role="MenuItemType" EntitySet="MenuItemType" />
+            <End Role="MenuItemTypeMenuItem" EntitySet="MenuItemTypeMenuItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Card" Association="Self.FK_Order_Card">
+            <End Role="Card" EntitySet="Card" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Location" Association="Self.FK_Order_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_OrderStatus" Association="Self.FK_Order_OrderStatus">
+            <End Role="OrderState" EntitySet="OrderState" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_PaymentType" Association="Self.FK_Order_PaymentType">
+            <End Role="PaymentType" EntitySet="PaymentType" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Reservation" Association="Self.FK_Order_Reservation">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ShippingType" Association="Self.FK_Order_ShippingType">
+            <End Role="ShippingType" EntitySet="ShippingType" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_UserAddress" Association="Self.FK_Order_UserAddress">
+            <End Role="UserAddress" EntitySet="UserAddress" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMenuItem_MenuItem" Association="Self.FK_OrderMenuItem_MenuItem">
+            <End Role="MenuItem" EntitySet="MenuItem" />
+            <End Role="OrderMenuItem" EntitySet="OrderMenuItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMenuItem_Order" Association="Self.FK_OrderMenuItem_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderMenuItem" EntitySet="OrderMenuItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMenuItem_PromoCode" Association="Self.FK_OrderMenuItem_PromoCode">
+            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="OrderMenuItem" EntitySet="OrderMenuItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMenuItemIngredient_Ingredient" Association="Self.FK_OrderMenuItemIngredient_Ingredient">
+            <End Role="Ingredient" EntitySet="Ingredient" />
+            <End Role="OrderMenuItemIngredient" EntitySet="OrderMenuItemIngredient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMenuItemIngredient_OrderMenuItem" Association="Self.FK_OrderMenuItemIngredient_OrderMenuItem">
+            <End Role="OrderMenuItem" EntitySet="OrderMenuItem" />
+            <End Role="OrderMenuItemIngredient" EntitySet="OrderMenuItemIngredient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PriceLocationMenuItem_Location" Association="Self.FK_PriceLocationMenuItem_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="PriceLocationMenuItem" EntitySet="PriceLocationMenuItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PriceLocationMenuItem_MenuItem" Association="Self.FK_PriceLocationMenuItem_MenuItem">
+            <End Role="MenuItem" EntitySet="MenuItem" />
+            <End Role="PriceLocationMenuItem" EntitySet="PriceLocationMenuItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promotion_Restaurant" Association="Self.FK_Promotion_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="Promotion" EntitySet="Promotion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promotion_TypeCode" Association="Self.FK_Promotion_TypeCode">
+            <End Role="TypeCode" EntitySet="TypeCode" />
+            <End Role="Promotion" EntitySet="Promotion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Location" Association="Self.FK_Reservation_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_User" Association="Self.FK_Reservation_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RestaurantTag_Restaurant" Association="Self.FK_RestaurantTag_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="RestaurantTag" EntitySet="RestaurantTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RestaurantTag_Tag" Association="Self.FK_RestaurantTag_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="RestaurantTag" EntitySet="RestaurantTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Session_Device" Association="Self.FK_Session_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="Session" EntitySet="Session" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Session_User" Association="Self.FK_Session_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Session" EntitySet="Session" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShippingPolygon_Location" Association="Self.FK_ShippingPolygon_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="ShippingPolygon" EntitySet="ShippingPolygon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShippingPolygonPoint_ShippingPolygon" Association="Self.FK_ShippingPolygonPoint_ShippingPolygon">
+            <End Role="ShippingPolygon" EntitySet="ShippingPolygon" />
+            <End Role="ShippingPolygonPoint" EntitySet="ShippingPolygonPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeCode_TypePromotion" Association="Self.FK_TypeCode_TypePromotion">
+            <End Role="TypePromotion" EntitySet="TypePromotion" />
+            <End Role="TypeCode" EntitySet="TypeCode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_PrivilegeSet" Association="Self.FK_User_PrivilegeSet">
+            <End Role="PrivilegeSet" EntitySet="PrivilegeSet" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAddress_User" Association="Self.FK_UserAddress_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserAddress" EntitySet="UserAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRates_Restaurant" Association="Self.FK_UserRates_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="UserRates" EntitySet="UserRates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRates_User" Association="Self.FK_UserRates_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRates" EntitySet="UserRates" />
+          </AssociationSet>
+          <AssociationSet Name="IdLocation" Association="Self.IdLocation">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="PromotionLocation" EntitySet="PromotionLocation" />
+          </AssociationSet>
+          <AssociationSet Name="IdPromotion" Association="Self.IdPromotion">
+            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="PromotionLocation" EntitySet="PromotionLocation" />
+          </AssociationSet>
+          <AssociationSet Name="PromotionCode_Promotion" Association="Self.PromotionCode_Promotion">
+            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="PromotionCode" EntitySet="PromotionCode" />
+          </AssociationSet>
+          <AssociationSet Name="PromotionMenuItem_MenuItem" Association="Self.PromotionMenuItem_MenuItem">
+            <End Role="MenuItem" EntitySet="MenuItem" />
+            <End Role="PromotionMenuItem" EntitySet="PromotionMenuItem" />
+          </AssociationSet>
+          <AssociationSet Name="PromotionMenuItem_Promotion" Association="Self.PromotionMenuItem_Promotion">
+            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="PromotionMenuItem" EntitySet="PromotionMenuItem" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="encalientesdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCardType" Type="Int32" />
+          <Property Name="LastDigits" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Token" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="IdUser" Type="Int32" />
+          <Property Name="Enabled" Type="Boolean" />
+          <NavigationProperty Name="CardType" Relationship="Self.FK_Card_CardType" FromRole="Card" ToRole="CardType" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Card_User" FromRole="Card" ToRole="User" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Card" FromRole="Card" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="CardType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cards" Relationship="Self.FK_Card_CardType" FromRole="CardType" ToRole="Card" />
+        </EntityType>
+        <EntityType Name="CodeNumberConfirmed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SessionId" Type="Int32" Nullable="false" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Session" Relationship="Self.FK_CodeNumberConfirmed_Session" FromRole="CodeNumberConfirmed" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppVersion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="OS" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="NotificationToken" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sessions" Relationship="Self.FK_Session_Device" FromRole="Device" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Ingredient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdIngredientGroup" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Double" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="145" FixedLength="false" Unicode="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="IngredientGroup" Relationship="Self.FK_Ingredient_IngredientGroup" FromRole="Ingredient" ToRole="IngredientGroup" />
+          <NavigationProperty Name="OrderMenuItems" Relationship="Self.OrderMenuItemIngredient" FromRole="Ingredient" ToRole="OrderMenuItem" />
+        </EntityType>
+        <EntityType Name="IngredientGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMenuItem" Type="Int32" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Ingredients" Relationship="Self.FK_Ingredient_IngredientGroup" FromRole="IngredientGroup" ToRole="Ingredient" />
+          <NavigationProperty Name="MenuItem" Relationship="Self.FK_IngredientGroup_MenuItem" FromRole="IngredientGroup" ToRole="MenuItem" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdRestaurant" Type="Int32" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ContactName2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Times" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="EstimatedTime" Type="Int32" Nullable="false" />
+          <Property Name="ReservationTimes" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SendTimes" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="Decimal" Nullable="false" />
+          <Property Name="Longitude" Type="Decimal" Nullable="false" />
+          <Property Name="AllowsReservation" Type="Boolean" Nullable="false" />
+          <Property Name="AllowsSending" Type="Boolean" Nullable="false" />
+          <Property Name="AllowsPickup" Type="Boolean" Nullable="false" />
+          <Property Name="AllowsEatHere" Type="Boolean" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="MinimumCost" Type="Double" Nullable="false" />
+          <Property Name="ShippingCost" Type="Double" />
+          <Property Name="PickupTimes" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MaximunReservation" Type="Int32" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK_Location_Restaurant" FromRole="Location" ToRole="Restaurant" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Location" FromRole="Location" ToRole="Order" />
+          <NavigationProperty Name="PriceLocationMenuItems" Relationship="Self.FK_PriceLocationMenuItem_Location" FromRole="Location" ToRole="PriceLocationMenuItem" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservation_Location" FromRole="Location" ToRole="Reservation" />
+          <NavigationProperty Name="ShippingPolygons" Relationship="Self.FK_ShippingPolygon_Location" FromRole="Location" ToRole="ShippingPolygon" />
+          <NavigationProperty Name="MenuItems" Relationship="Self.MenuItemLocation" FromRole="Location" ToRole="MenuItem" />
+          <NavigationProperty Name="Promotions" Relationship="Self.PromotionLocation" FromRole="Location" ToRole="Promotion" />
+          <NavigationProperty Name="PaymentTypes" Relationship="Self.LocationPaymentType" FromRole="Location" ToRole="PaymentType" />
+        </EntityType>
+        <EntityType Name="MenuItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdRestaurant" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Icon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <NavigationProperty Name="IngredientGroups" Relationship="Self.FK_IngredientGroup_MenuItem" FromRole="MenuItem" ToRole="IngredientGroup" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK_MenuItem_Restaurant" FromRole="MenuItem" ToRole="Restaurant" />
+          <NavigationProperty Name="OrderMenuItems" Relationship="Self.FK_OrderMenuItem_MenuItem" FromRole="MenuItem" ToRole="OrderMenuItem" />
+          <NavigationProperty Name="PriceLocationMenuItems" Relationship="Self.FK_PriceLocationMenuItem_MenuItem" FromRole="MenuItem" ToRole="PriceLocationMenuItem" />
+          <NavigationProperty Name="Locations" Relationship="Self.MenuItemLocation" FromRole="MenuItem" ToRole="Location" />
+          <NavigationProperty Name="MenuItemTypes" Relationship="Self.MenuItemTypeMenuItem" FromRole="MenuItem" ToRole="MenuItemType" />
+          <NavigationProperty Name="Promotions" Relationship="Self.PromotionMenuItem" FromRole="MenuItem" ToRole="Promotion" />
+        </EntityType>
+        <EntityType Name="MenuItemType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="IdRestaurant" Type="Int32" Nullable="false" />
+          <Property Name="Priority" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK_MenuItemType_Restaurant" FromRole="MenuItemType" ToRole="Restaurant" />
+          <NavigationProperty Name="MenuItems" Relationship="Self.MenuItemTypeMenuItem" FromRole="MenuItemType" ToRole="MenuItem" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdLocation" Type="Int32" Nullable="false" />
+          <Property Name="IdUser" Type="Int32" />
+          <Property Name="IdOrderStatus" Type="Int32" Nullable="false" />
+          <Property Name="IdPaymentType" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" />
+          <Property Name="IdCard" Type="Int32" />
+          <Property Name="BillDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="SendingTime" Type="DateTime" Nullable="false" />
+          <Property Name="EstimatedTime" Type="Int32" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="ShippingTypeId" Type="Int32" Nullable="false" />
+          <Property Name="UserAddressId" Type="Int32" />
+          <Property Name="ReservationId" Type="Int32" />
+          <NavigationProperty Name="Card" Relationship="Self.FK_Order_Card" FromRole="Order" ToRole="Card" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Order_Location" FromRole="Order" ToRole="Location" />
+          <NavigationProperty Name="OrderState" Relationship="Self.FK_Order_OrderStatus" FromRole="Order" ToRole="OrderState" />
+          <NavigationProperty Name="PaymentType" Relationship="Self.FK_Order_PaymentType" FromRole="Order" ToRole="PaymentType" />
+          <NavigationProperty Name="Reservation" Relationship="Self.FK_Order_Reservation" FromRole="Order" ToRole="Reservation" />
+          <NavigationProperty Name="ShippingType" Relationship="Self.FK_Order_ShippingType" FromRole="Order" ToRole="ShippingType" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Order_User" FromRole="Order" ToRole="User" />
+          <NavigationProperty Name="UserAddress" Relationship="Self.FK_Order_UserAddress" FromRole="Order" ToRole="UserAddress" />
+          <NavigationProperty Name="OrderMenuItems" Relationship="Self.FK_OrderMenuItem_Order" FromRole="Order" ToRole="OrderMenuItem" />
+        </EntityType>
+        <EntityType Name="OrderMenuItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdOrder" Type="Int32" Nullable="false" />
+          <Property Name="IdMenuItem" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="IdPromoCode" Type="Int32" />
+          <Property Name="Total" Type="Double" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MenuItem" Relationship="Self.FK_OrderMenuItem_MenuItem" FromRole="OrderMenuItem" ToRole="MenuItem" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderMenuItem_Order" FromRole="OrderMenuItem" ToRole="Order" />
+          <NavigationProperty Name="Promotion" Relationship="Self.FK_OrderMenuItem_PromoCode" FromRole="OrderMenuItem" ToRole="Promotion" />
+          <NavigationProperty Name="Ingredients" Relationship="Self.OrderMenuItemIngredient" FromRole="OrderMenuItem" ToRole="Ingredient" />
+        </EntityType>
+        <EntityType Name="OrderState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_OrderStatus" FromRole="OrderState" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_PaymentType" FromRole="PaymentType" ToRole="Order" />
+          <NavigationProperty Name="Locations" Relationship="Self.LocationPaymentType" FromRole="PaymentType" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="PriceLocationMenuItem">
+          <Key>
+            <PropertyRef Name="IdLocation" />
+            <PropertyRef Name="IdMenuItem" />
+          </Key>
+          <Property Name="IdLocation" Type="Int32" Nullable="false" />
+          <Property Name="IdMenuItem" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_PriceLocationMenuItem_Location" FromRole="PriceLocationMenuItem" ToRole="Location" />
+          <NavigationProperty Name="MenuItem" Relationship="Self.FK_PriceLocationMenuItem_MenuItem" FromRole="PriceLocationMenuItem" ToRole="MenuItem" />
+        </EntityType>
+        <EntityType Name="PrivilegeSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ViewOrder" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_PrivilegeSet" FromRole="PrivilegeSet" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRestaurant" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" />
+          <Property Name="Days" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Priority" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderMenuItems" Relationship="Self.FK_OrderMenuItem_PromoCode" FromRole="Promotion" ToRole="OrderMenuItem" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK_Promotion_Restaurant" FromRole="Promotion" ToRole="Restaurant" />
+          <NavigationProperty Name="TypeCode" Relationship="Self.FK_Promotion_TypeCode" FromRole="Promotion" ToRole="TypeCode" />
+          <NavigationProperty Name="PromotionCodes" Relationship="Self.PromotionCode_Promotion" FromRole="Promotion" ToRole="PromotionCode" />
+          <NavigationProperty Name="Locations" Relationship="Self.PromotionLocation" FromRole="Promotion" ToRole="Location" />
+          <NavigationProperty Name="MenuItems" Relationship="Self.PromotionMenuItem" FromRole="Promotion" ToRole="MenuItem" />
+        </EntityType>
+        <EntityType Name="PromotionCode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPromotion" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Erasable" Type="Boolean" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Promotion" Relationship="Self.PromotionCode_Promotion" FromRole="PromotionCode" ToRole="Promotion" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdLocation" Type="Int32" Nullable="false" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" />
+          <Property Name="PartySize" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Reservation_Location" FromRole="Reservation" ToRole="Location" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Reservation" FromRole="Reservation" ToRole="Order" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Reservation_User" FromRole="Reservation" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rank" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Hash" Type="Int32" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Locations" Relationship="Self.FK_Location_Restaurant" FromRole="Restaurant" ToRole="Location" />
+          <NavigationProperty Name="MenuItems" Relationship="Self.FK_MenuItem_Restaurant" FromRole="Restaurant" ToRole="MenuItem" />
+          <NavigationProperty Name="MenuItemTypes" Relationship="Self.FK_MenuItemType_Restaurant" FromRole="Restaurant" ToRole="MenuItemType" />
+          <NavigationProperty Name="Promotions" Relationship="Self.FK_Promotion_Restaurant" FromRole="Restaurant" ToRole="Promotion" />
+          <NavigationProperty Name="UserRates" Relationship="Self.FK_UserRates_Restaurant" FromRole="Restaurant" ToRole="UserRates" />
+          <NavigationProperty Name="Tags" Relationship="Self.RestaurantTag" FromRole="Restaurant" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="ExpirationTime" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" />
+          <Property Name="AppVersion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Token" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FacebookToken" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="DeviceId" Type="Int32" />
+          <NavigationProperty Name="CodeNumberConfirmeds" Relationship="Self.FK_CodeNumberConfirmed_Session" FromRole="Session" ToRole="CodeNumberConfirmed" />
+          <NavigationProperty Name="Device" Relationship="Self.FK_Session_Device" FromRole="Session" ToRole="Device" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Session_User" FromRole="Session" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ShippingPolygon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdLocation" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Cost" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_ShippingPolygon_Location" FromRole="ShippingPolygon" ToRole="Location" />
+          <NavigationProperty Name="ShippingPolygonPoints" Relationship="Self.FK_ShippingPolygonPoint_ShippingPolygon" FromRole="ShippingPolygon" ToRole="ShippingPolygonPoint" />
+        </EntityType>
+        <EntityType Name="ShippingPolygonPoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdShippingPolygon" Type="Int32" Nullable="false" />
+          <Property Name="ListIndex" Type="Int32" Nullable="false" />
+          <Property Name="Latitude" Type="Decimal" />
+          <Property Name="Longitude" Type="Decimal" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ShippingPolygon" Relationship="Self.FK_ShippingPolygonPoint_ShippingPolygon" FromRole="ShippingPolygonPoint" ToRole="ShippingPolygon" />
+        </EntityType>
+        <EntityType Name="ShippingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_ShippingType" FromRole="ShippingType" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Restaurants" Relationship="Self.RestaurantTag" FromRole="Tag" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="TypeCode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypePromotionId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Promotions" Relationship="Self.FK_Promotion_TypeCode" FromRole="TypeCode" ToRole="Promotion" />
+          <NavigationProperty Name="TypePromotion" Relationship="Self.FK_TypeCode_TypePromotion" FromRole="TypeCode" ToRole="TypePromotion" />
+        </EntityType>
+        <EntityType Name="TypePromotion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TypeCodes" Relationship="Self.FK_TypeCode_TypePromotion" FromRole="TypePromotion" ToRole="TypeCode" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUserType" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CellPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ForeignUserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="PrivilegeSetId" Type="Int32" Nullable="false" />
+          <Property Name="IdConekta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BornDate" Type="DateTime" />
+          <Property Name="CellphoneConfirmed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cards" Relationship="Self.FK_Card_User" FromRole="User" ToRole="Card" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="PrivilegeSet" Relationship="Self.FK_User_PrivilegeSet" FromRole="User" ToRole="PrivilegeSet" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservation_User" FromRole="User" ToRole="Reservation" />
+          <NavigationProperty Name="Sessions" Relationship="Self.FK_Session_User" FromRole="User" ToRole="Session" />
+          <NavigationProperty Name="UserAddresses" Relationship="Self.FK_UserAddress_User" FromRole="User" ToRole="UserAddress" />
+          <NavigationProperty Name="UserRates" Relationship="Self.FK_UserRates_User" FromRole="User" ToRole="UserRates" />
+        </EntityType>
+        <EntityType Name="UserAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUser" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="Decimal" />
+          <Property Name="Longitude" Type="Decimal" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AptNumber" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_UserAddress" FromRole="UserAddress" ToRole="Order" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserAddress_User" FromRole="UserAddress" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserRate">
+          <Key>
+            <PropertyRef Name="IdUser" />
+            <PropertyRef Name="IdRestaurant" />
+          </Key>
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="IdRestaurant" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK_UserRates_Restaurant" FromRole="UserRates" ToRole="Restaurant" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserRates_User" FromRole="UserRates" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Card_CardType">
+          <End Role="CardType" Type="Self.CardType" Multiplicity="0..1" />
+          <End Role="Card" Type="Self.Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="IdCardType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Card_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Card" Type="Self.Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Card">
+          <End Role="Card" Type="Self.Card" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Card">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdCard" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CodeNumberConfirmed_Session">
+          <End Role="Session" Type="Self.Session" Multiplicity="1" />
+          <End Role="CodeNumberConfirmed" Type="Self.CodeNumberConfirmed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CodeNumberConfirmed">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Session_Device">
+          <End Role="Device" Type="Self.Device" Multiplicity="0..1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="DeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingredient_IngredientGroup">
+          <End Role="IngredientGroup" Type="Self.IngredientGroup" Multiplicity="1" />
+          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IngredientGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ingredient">
+              <PropertyRef Name="IdIngredientGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IngredientGroup_MenuItem">
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="1" />
+          <End Role="IngredientGroup" Type="Self.IngredientGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IngredientGroup">
+              <PropertyRef Name="IdMenuItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Location" Type="Self.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="IdRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PriceLocationMenuItem_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="PriceLocationMenuItem" Type="Self.PriceLocationMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PriceLocationMenuItem">
+              <PropertyRef Name="IdLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShippingPolygon_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="ShippingPolygon" Type="Self.ShippingPolygon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShippingPolygon">
+              <PropertyRef Name="IdLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItem_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItem">
+              <PropertyRef Name="IdRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMenuItem_MenuItem">
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="1" />
+          <End Role="OrderMenuItem" Type="Self.OrderMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderMenuItem">
+              <PropertyRef Name="IdMenuItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PriceLocationMenuItem_MenuItem">
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="1" />
+          <End Role="PriceLocationMenuItem" Type="Self.PriceLocationMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PriceLocationMenuItem">
+              <PropertyRef Name="IdMenuItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItemType_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="MenuItemType" Type="Self.MenuItemType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuItemType">
+              <PropertyRef Name="IdRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_OrderStatus">
+          <End Role="OrderState" Type="Self.OrderState" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdOrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_PaymentType">
+          <End Role="PaymentType" Type="Self.PaymentType" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdPaymentType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Reservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ReservationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ShippingType">
+          <End Role="ShippingType" Type="Self.ShippingType" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippingType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ShippingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_UserAddress">
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAddress">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="UserAddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMenuItem_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderMenuItem" Type="Self.OrderMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderMenuItem">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMenuItem_PromoCode">
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
+          <End Role="OrderMenuItem" Type="Self.OrderMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderMenuItem">
+              <PropertyRef Name="IdPromoCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_PrivilegeSet">
+          <End Role="PrivilegeSet" Type="Self.PrivilegeSet" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PrivilegeSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="PrivilegeSetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promotion_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Promotion">
+              <PropertyRef Name="IdRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promotion_TypeCode">
+          <End Role="TypeCode" Type="Self.TypeCode" Multiplicity="1" />
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeCode">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Promotion">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PromotionCode_Promotion">
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="1" />
+          <End Role="PromotionCode" Type="Self.PromotionCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PromotionCode">
+              <PropertyRef Name="IdPromotion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRates_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="UserRates" Type="Self.UserRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRates">
+              <PropertyRef Name="IdRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Session_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShippingPolygonPoint_ShippingPolygon">
+          <End Role="ShippingPolygon" Type="Self.ShippingPolygon" Multiplicity="1" />
+          <End Role="ShippingPolygonPoint" Type="Self.ShippingPolygonPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippingPolygon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShippingPolygonPoint">
+              <PropertyRef Name="IdShippingPolygon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeCode_TypePromotion">
+          <End Role="TypePromotion" Type="Self.TypePromotion" Multiplicity="1" />
+          <End Role="TypeCode" Type="Self.TypeCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypePromotion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TypeCode">
+              <PropertyRef Name="TypePromotionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAddress_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAddress">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRates_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRates" Type="Self.UserRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRates">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MenuItemLocation">
+          <End Role="Location" Type="Self.Location" Multiplicity="*" />
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+        </Association>
+        <Association Name="MenuItemTypeMenuItem">
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+          <End Role="MenuItemType" Type="Self.MenuItemType" Multiplicity="*" />
+        </Association>
+        <Association Name="PromotionLocation">
+          <End Role="Location" Type="Self.Location" Multiplicity="*" />
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
+        </Association>
+        <Association Name="PromotionMenuItem">
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
+        </Association>
+        <Association Name="LocationPaymentType">
+          <End Role="Location" Type="Self.Location" Multiplicity="*" />
+          <End Role="PaymentType" Type="Self.PaymentType" Multiplicity="*" />
+        </Association>
+        <Association Name="OrderMenuItemIngredient">
+          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="*" />
+          <End Role="OrderMenuItem" Type="Self.OrderMenuItem" Multiplicity="*" />
+        </Association>
+        <Association Name="RestaurantTag">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="*" />
+          <End Role="Tag" Type="Self.Tag" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="encalientesdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cards" EntityType="Self.Card" />
+          <EntitySet Name="CardTypes" EntityType="Self.CardType" />
+          <EntitySet Name="CodeNumberConfirmeds" EntityType="Self.CodeNumberConfirmed" />
+          <EntitySet Name="Devices" EntityType="Self.Device" />
+          <EntitySet Name="Ingredients" EntityType="Self.Ingredient" />
+          <EntitySet Name="IngredientGroups" EntityType="Self.IngredientGroup" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="MenuItems" EntityType="Self.MenuItem" />
+          <EntitySet Name="MenuItemTypes" EntityType="Self.MenuItemType" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="OrderMenuItems" EntityType="Self.OrderMenuItem" />
+          <EntitySet Name="OrderStates" EntityType="Self.OrderState" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentType" />
+          <EntitySet Name="PriceLocationMenuItems" EntityType="Self.PriceLocationMenuItem" />
+          <EntitySet Name="PrivilegeSets" EntityType="Self.PrivilegeSet" />
+          <EntitySet Name="Promotions" EntityType="Self.Promotion" />
+          <EntitySet Name="PromotionCodes" EntityType="Self.PromotionCode" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
+          <EntitySet Name="Sessions" EntityType="Self.Session" />
+          <EntitySet Name="ShippingPolygons" EntityType="Self.ShippingPolygon" />
+          <EntitySet Name="ShippingPolygonPoints" EntityType="Self.ShippingPolygonPoint" />
+          <EntitySet Name="ShippingTypes" EntityType="Self.ShippingType" />
+          <EntitySet Name="Tags" EntityType="Self.Tag" />
+          <EntitySet Name="TypeCodes" EntityType="Self.TypeCode" />
+          <EntitySet Name="TypePromotions" EntityType="Self.TypePromotion" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserAddresses" EntityType="Self.UserAddress" />
+          <EntitySet Name="UserRates" EntityType="Self.UserRate" />
+          <AssociationSet Name="FK_Card_CardType" Association="Self.FK_Card_CardType">
+            <End Role="CardType" EntitySet="CardTypes" />
+            <End Role="Card" EntitySet="Cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Card_User" Association="Self.FK_Card_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Card" EntitySet="Cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Card" Association="Self.FK_Order_Card">
+            <End Role="Card" EntitySet="Cards" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CodeNumberConfirmed_Session" Association="Self.FK_CodeNumberConfirmed_Session">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="CodeNumberConfirmed" EntitySet="CodeNumberConfirmeds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Session_Device" Association="Self.FK_Session_Device">
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingredient_IngredientGroup" Association="Self.FK_Ingredient_IngredientGroup">
+            <End Role="IngredientGroup" EntitySet="IngredientGroups" />
+            <End Role="Ingredient" EntitySet="Ingredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IngredientGroup_MenuItem" Association="Self.FK_IngredientGroup_MenuItem">
+            <End Role="MenuItem" EntitySet="MenuItems" />
+            <End Role="IngredientGroup" EntitySet="IngredientGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_Restaurant" Association="Self.FK_Location_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="Location" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Location" Association="Self.FK_Order_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PriceLocationMenuItem_Location" Association="Self.FK_PriceLocationMenuItem_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="PriceLocationMenuItem" EntitySet="PriceLocationMenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Location" Association="Self.FK_Reservation_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShippingPolygon_Location" Association="Self.FK_ShippingPolygon_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="ShippingPolygon" EntitySet="ShippingPolygons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItem_Restaurant" Association="Self.FK_MenuItem_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="MenuItem" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMenuItem_MenuItem" Association="Self.FK_OrderMenuItem_MenuItem">
+            <End Role="MenuItem" EntitySet="MenuItems" />
+            <End Role="OrderMenuItem" EntitySet="OrderMenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PriceLocationMenuItem_MenuItem" Association="Self.FK_PriceLocationMenuItem_MenuItem">
+            <End Role="MenuItem" EntitySet="MenuItems" />
+            <End Role="PriceLocationMenuItem" EntitySet="PriceLocationMenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItemType_Restaurant" Association="Self.FK_MenuItemType_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="MenuItemType" EntitySet="MenuItemTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_OrderStatus" Association="Self.FK_Order_OrderStatus">
+            <End Role="OrderState" EntitySet="OrderStates" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_PaymentType" Association="Self.FK_Order_PaymentType">
+            <End Role="PaymentType" EntitySet="PaymentTypes" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Reservation" Association="Self.FK_Order_Reservation">
+            <End Role="Reservation" EntitySet="Reservations" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ShippingType" Association="Self.FK_Order_ShippingType">
+            <End Role="ShippingType" EntitySet="ShippingTypes" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_UserAddress" Association="Self.FK_Order_UserAddress">
+            <End Role="UserAddress" EntitySet="UserAddresses" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMenuItem_Order" Association="Self.FK_OrderMenuItem_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderMenuItem" EntitySet="OrderMenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMenuItem_PromoCode" Association="Self.FK_OrderMenuItem_PromoCode">
+            <End Role="Promotion" EntitySet="Promotions" />
+            <End Role="OrderMenuItem" EntitySet="OrderMenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_PrivilegeSet" Association="Self.FK_User_PrivilegeSet">
+            <End Role="PrivilegeSet" EntitySet="PrivilegeSets" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promotion_Restaurant" Association="Self.FK_Promotion_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="Promotion" EntitySet="Promotions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promotion_TypeCode" Association="Self.FK_Promotion_TypeCode">
+            <End Role="TypeCode" EntitySet="TypeCodes" />
+            <End Role="Promotion" EntitySet="Promotions" />
+          </AssociationSet>
+          <AssociationSet Name="PromotionCode_Promotion" Association="Self.PromotionCode_Promotion">
+            <End Role="Promotion" EntitySet="Promotions" />
+            <End Role="PromotionCode" EntitySet="PromotionCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_User" Association="Self.FK_Reservation_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRates_Restaurant" Association="Self.FK_UserRates_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="UserRates" EntitySet="UserRates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Session_User" Association="Self.FK_Session_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShippingPolygonPoint_ShippingPolygon" Association="Self.FK_ShippingPolygonPoint_ShippingPolygon">
+            <End Role="ShippingPolygon" EntitySet="ShippingPolygons" />
+            <End Role="ShippingPolygonPoint" EntitySet="ShippingPolygonPoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeCode_TypePromotion" Association="Self.FK_TypeCode_TypePromotion">
+            <End Role="TypePromotion" EntitySet="TypePromotions" />
+            <End Role="TypeCode" EntitySet="TypeCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAddress_User" Association="Self.FK_UserAddress_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserAddress" EntitySet="UserAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRates_User" Association="Self.FK_UserRates_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserRates" EntitySet="UserRates" />
+          </AssociationSet>
+          <AssociationSet Name="MenuItemLocation" Association="Self.MenuItemLocation">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="MenuItem" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="MenuItemTypeMenuItem" Association="Self.MenuItemTypeMenuItem">
+            <End Role="MenuItem" EntitySet="MenuItems" />
+            <End Role="MenuItemType" EntitySet="MenuItemTypes" />
+          </AssociationSet>
+          <AssociationSet Name="PromotionLocation" Association="Self.PromotionLocation">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Promotion" EntitySet="Promotions" />
+          </AssociationSet>
+          <AssociationSet Name="PromotionMenuItem" Association="Self.PromotionMenuItem">
+            <End Role="MenuItem" EntitySet="MenuItems" />
+            <End Role="Promotion" EntitySet="Promotions" />
+          </AssociationSet>
+          <AssociationSet Name="LocationPaymentType" Association="Self.LocationPaymentType">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="PaymentType" EntitySet="PaymentTypes" />
+          </AssociationSet>
+          <AssociationSet Name="OrderMenuItemIngredient" Association="Self.OrderMenuItemIngredient">
+            <End Role="Ingredient" EntitySet="Ingredients" />
+            <End Role="OrderMenuItem" EntitySet="OrderMenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="RestaurantTag" Association="Self.RestaurantTag">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="encalientesdbModelStoreContainer" CdmEntityContainer="encalientesdbEntities">
+          <EntitySetMapping Name="Cards">
+            <EntityTypeMapping TypeName="encalientesdbModel.Card">
+              <MappingFragment StoreEntitySet="Card">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdCardType" ColumnName="IdCardType" />
+                <ScalarProperty Name="LastDigits" ColumnName="LastDigits" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardTypes">
+            <EntityTypeMapping TypeName="encalientesdbModel.CardType">
+              <MappingFragment StoreEntitySet="CardType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CodeNumberConfirmeds">
+            <EntityTypeMapping TypeName="encalientesdbModel.CodeNumberConfirmed">
+              <MappingFragment StoreEntitySet="CodeNumberConfirmed">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Devices">
+            <EntityTypeMapping TypeName="encalientesdbModel.Device">
+              <MappingFragment StoreEntitySet="Device">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AppVersion" ColumnName="AppVersion" />
+                <ScalarProperty Name="OS" ColumnName="OS" />
+                <ScalarProperty Name="NotificationToken" ColumnName="NotificationToken" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ingredients">
+            <EntityTypeMapping TypeName="encalientesdbModel.Ingredient">
+              <MappingFragment StoreEntitySet="Ingredient">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdIngredientGroup" ColumnName="IdIngredientGroup" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IngredientGroups">
+            <EntityTypeMapping TypeName="encalientesdbModel.IngredientGroup">
+              <MappingFragment StoreEntitySet="IngredientGroup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdMenuItem" ColumnName="IdMenuItem" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="encalientesdbModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="IdRestaurant" ColumnName="IdRestaurant" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Telephone2" ColumnName="Telephone2" />
+                <ScalarProperty Name="Telephone3" ColumnName="Telephone3" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactName2" ColumnName="ContactName2" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Times" ColumnName="Times" />
+                <ScalarProperty Name="EstimatedTime" ColumnName="EstimatedTime" />
+                <ScalarProperty Name="ReservationTimes" ColumnName="ReservationTimes" />
+                <ScalarProperty Name="SendTimes" ColumnName="SendTimes" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="AllowsReservation" ColumnName="AllowsReservation" />
+                <ScalarProperty Name="AllowsSending" ColumnName="AllowsSending" />
+                <ScalarProperty Name="AllowsPickup" ColumnName="AllowsPickup" />
+                <ScalarProperty Name="AllowsEatHere" ColumnName="AllowsEatHere" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="MinimumCost" ColumnName="MinimumCost" />
+                <ScalarProperty Name="ShippingCost" ColumnName="ShippingCost" />
+                <ScalarProperty Name="PickupTimes" ColumnName="PickupTimes" />
+                <ScalarProperty Name="MaximunReservation" ColumnName="MaximunReservation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuItems">
+            <EntityTypeMapping TypeName="encalientesdbModel.MenuItem">
+              <MappingFragment StoreEntitySet="MenuItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdRestaurant" ColumnName="IdRestaurant" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuItemTypes">
+            <EntityTypeMapping TypeName="encalientesdbModel.MenuItemType">
+              <MappingFragment StoreEntitySet="MenuItemType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="IdRestaurant" ColumnName="IdRestaurant" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="encalientesdbModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdLocation" ColumnName="IdLocation" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdOrderStatus" ColumnName="IdOrderStatus" />
+                <ScalarProperty Name="IdPaymentType" ColumnName="IdPaymentType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="IdCard" ColumnName="IdCard" />
+                <ScalarProperty Name="BillDescription" ColumnName="BillDescription" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="SendingTime" ColumnName="SendingTime" />
+                <ScalarProperty Name="EstimatedTime" ColumnName="EstimatedTime" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ShippingTypeId" ColumnName="ShippingTypeId" />
+                <ScalarProperty Name="UserAddressId" ColumnName="UserAddressId" />
+                <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderMenuItems">
+            <EntityTypeMapping TypeName="encalientesdbModel.OrderMenuItem">
+              <MappingFragment StoreEntitySet="OrderMenuItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+                <ScalarProperty Name="IdMenuItem" ColumnName="IdMenuItem" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="IdPromoCode" ColumnName="IdPromoCode" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStates">
+            <EntityTypeMapping TypeName="encalientesdbModel.OrderState">
+              <MappingFragment StoreEntitySet="OrderState">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTypes">
+            <EntityTypeMapping TypeName="encalientesdbModel.PaymentType">
+              <MappingFragment StoreEntitySet="PaymentType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PriceLocationMenuItems">
+            <EntityTypeMapping TypeName="encalientesdbModel.PriceLocationMenuItem">
+              <MappingFragment StoreEntitySet="PriceLocationMenuItem">
+                <ScalarProperty Name="IdLocation" ColumnName="IdLocation" />
+                <ScalarProperty Name="IdMenuItem" ColumnName="IdMenuItem" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrivilegeSets">
+            <EntityTypeMapping TypeName="encalientesdbModel.PrivilegeSet">
+              <MappingFragment StoreEntitySet="PrivilegeSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ViewOrder" ColumnName="ViewOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promotions">
+            <EntityTypeMapping TypeName="encalientesdbModel.Promotion">
+              <MappingFragment StoreEntitySet="Promotion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdRestaurant" ColumnName="IdRestaurant" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Days" ColumnName="Days" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PromotionCodes">
+            <EntityTypeMapping TypeName="encalientesdbModel.PromotionCode">
+              <MappingFragment StoreEntitySet="PromotionCode">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdPromotion" ColumnName="IdPromotion" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Erasable" ColumnName="Erasable" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="encalientesdbModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdLocation" ColumnName="IdLocation" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="PartySize" ColumnName="PartySize" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurants">
+            <EntityTypeMapping TypeName="encalientesdbModel.Restaurant">
+              <MappingFragment StoreEntitySet="Restaurant">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Telephone2" ColumnName="Telephone2" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="encalientesdbModel.Session">
+              <MappingFragment StoreEntitySet="Session">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="ExpirationTime" ColumnName="ExpirationTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="AppVersion" ColumnName="AppVersion" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="FacebookToken" ColumnName="FacebookToken" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippingPolygons">
+            <EntityTypeMapping TypeName="encalientesdbModel.ShippingPolygon">
+              <MappingFragment StoreEntitySet="ShippingPolygon">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdLocation" ColumnName="IdLocation" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippingPolygonPoints">
+            <EntityTypeMapping TypeName="encalientesdbModel.ShippingPolygonPoint">
+              <MappingFragment StoreEntitySet="ShippingPolygonPoint">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdShippingPolygon" ColumnName="IdShippingPolygon" />
+                <ScalarProperty Name="ListIndex" ColumnName="ListIndex" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippingTypes">
+            <EntityTypeMapping TypeName="encalientesdbModel.ShippingType">
+              <MappingFragment StoreEntitySet="ShippingType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="encalientesdbModel.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeCodes">
+            <EntityTypeMapping TypeName="encalientesdbModel.TypeCode">
+              <MappingFragment StoreEntitySet="TypeCode">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypePromotionId" ColumnName="TypePromotionId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypePromotions">
+            <EntityTypeMapping TypeName="encalientesdbModel.TypePromotion">
+              <MappingFragment StoreEntitySet="TypePromotion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="encalientesdbModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdUserType" ColumnName="IdUserType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Telephone2" ColumnName="Telephone2" />
+                <ScalarProperty Name="ForeignUserName" ColumnName="ForeignUserName" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="PrivilegeSetId" ColumnName="PrivilegeSetId" />
+                <ScalarProperty Name="IdConekta" ColumnName="IdConekta" />
+                <ScalarProperty Name="BornDate" ColumnName="BornDate" />
+                <ScalarProperty Name="CellphoneConfirmed" ColumnName="CellphoneConfirmed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAddresses">
+            <EntityTypeMapping TypeName="encalientesdbModel.UserAddress">
+              <MappingFragment StoreEntitySet="UserAddress">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="AptNumber" ColumnName="AptNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRates">
+            <EntityTypeMapping TypeName="encalientesdbModel.UserRate">
+              <MappingFragment StoreEntitySet="UserRates">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdRestaurant" ColumnName="IdRestaurant" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="MenuItemLocation" TypeName="encalientesdbModel.MenuItemLocation" StoreEntitySet="MenuItemLocation">
+            <EndProperty Name="Location">
+              <ScalarProperty Name="Id" ColumnName="IdLocation" />
+            </EndProperty>
+            <EndProperty Name="MenuItem">
+              <ScalarProperty Name="Id" ColumnName="IdMenuItem" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="MenuItemTypeMenuItem" TypeName="encalientesdbModel.MenuItemTypeMenuItem" StoreEntitySet="MenuItemTypeMenuItem">
+            <EndProperty Name="MenuItem">
+              <ScalarProperty Name="Id" ColumnName="IdMenuItem" />
+            </EndProperty>
+            <EndProperty Name="MenuItemType">
+              <ScalarProperty Name="Id" ColumnName="IdMenuItemType" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PromotionLocation" TypeName="encalientesdbModel.PromotionLocation" StoreEntitySet="PromotionLocation">
+            <EndProperty Name="Location">
+              <ScalarProperty Name="Id" ColumnName="IdLocation" />
+            </EndProperty>
+            <EndProperty Name="Promotion">
+              <ScalarProperty Name="Id" ColumnName="IdPromotion" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PromotionMenuItem" TypeName="encalientesdbModel.PromotionMenuItem" StoreEntitySet="PromotionMenuItem">
+            <EndProperty Name="MenuItem">
+              <ScalarProperty Name="Id" ColumnName="idMenuItem" />
+            </EndProperty>
+            <EndProperty Name="Promotion">
+              <ScalarProperty Name="Id" ColumnName="idPromotion" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="LocationPaymentType" TypeName="encalientesdbModel.LocationPaymentType" StoreEntitySet="LocationPaymentType">
+            <EndProperty Name="Location">
+              <ScalarProperty Name="Id" ColumnName="IdLocation" />
+            </EndProperty>
+            <EndProperty Name="PaymentType">
+              <ScalarProperty Name="Id" ColumnName="IdPaymentType" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="OrderMenuItemIngredient" TypeName="encalientesdbModel.OrderMenuItemIngredient" StoreEntitySet="OrderMenuItemIngredient">
+            <EndProperty Name="Ingredient">
+              <ScalarProperty Name="Id" ColumnName="IdIngredient" />
+            </EndProperty>
+            <EndProperty Name="OrderMenuItem">
+              <ScalarProperty Name="Id" ColumnName="IdOrderMenuItem" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RestaurantTag" TypeName="encalientesdbModel.RestaurantTag" StoreEntitySet="RestaurantTag">
+            <EndProperty Name="Restaurant">
+              <ScalarProperty Name="Id" ColumnName="IdRestaurant" />
+            </EndProperty>
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="Id" ColumnName="IdTag" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

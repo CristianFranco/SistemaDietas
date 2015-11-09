@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sistema_dietaModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cliente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Telefono" Type="varchar" MaxLength="10" />
+    <Property Name="Celular" Type="varchar" MaxLength="10" />
+    <Property Name="IdDireccion" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="dieta">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCliente" Type="int" Nullable="false" />
+    <Property Name="IdTipoAnimal" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="FechaCreacion" Type="date" Nullable="false" />
+    <Property Name="FechaExpiracion" Type="date" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.sistema_dieta.dieta_materia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="dieta_materia">
+    <Key>
+      <PropertyRef Name="IdDieta" />
+      <PropertyRef Name="IdMateria" />
+      <PropertyRef Name="Cantidad" />
+    </Key>
+    <Property Name="IdDieta" Type="int" Nullable="false" />
+    <Property Name="IdMateria" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="direccion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Direccion" Type="text" Nullable="false" />
+    <Property Name="Municipio" Type="varchar" MaxLength="45" />
+    <Property Name="Estado" Type="varchar" MaxLength="45" />
+    <Property Name="CP" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="materia_prima">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClaveServidor" Type="int" />
+    <Property Name="IsServerVersion" Type="bit" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Fosforo" Type="double" Nullable="false" />
+    <Property Name="MateriaGrasa" Type="double" Nullable="false" />
+    <Property Name="CenizaBruta" Type="double" Nullable="false" />
+    <Property Name="FibraBruta" Type="double" Nullable="false" />
+    <Property Name="ProteinaBruta" Type="double" Nullable="false" />
+    <Property Name="MateriaSeca" Type="double" Nullable="false" />
+    <Property Name="FND" Type="double" Nullable="false" />
+    <Property Name="FAD" Type="double" Nullable="false" />
+    <Property Name="LAD" Type="double" Nullable="false" />
+    <Property Name="Calcio" Type="double" Nullable="false" />
+    <Property Name="ParedVegetal" Type="double" Nullable="false" />
+    <Property Name="Azucares" Type="double" Nullable="false" />
+    <Property Name="CenizasInsolubles" Type="double" Nullable="false" />
+    <Property Name="Almidon" Type="double" Nullable="false" />
+    <Property Name="EnergiaBruta" Type="double" Nullable="false" />
+    <Property Name="IdCliente" Type="int" />
+  </EntityType>
+  <EntityType Name="necesidad_fisiologica">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VitaminaD" Type="double" Nullable="false" />
+    <Property Name="VitaminaA" Type="double" Nullable="false" />
+    <Property Name="VitaminaE" Type="double" Nullable="false" />
+    <Property Name="P" Type="double" Nullable="false" />
+    <Property Name="EM" Type="double" Nullable="false" />
+    <Property Name="Ca" Type="double" Nullable="false" />
+    <Property Name="Na" Type="double" Nullable="false" />
+    <Property Name="Mg" Type="double" Nullable="false" />
+    <Property Name="PM" Type="double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tipo_animal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClaveServidor" Type="int" />
+    <Property Name="IdNecesidad" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="Peso" Type="double" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Cliente_Direccion">
+    <End Role="direccion" Type="Self.direccion" Multiplicity="1" />
+    <End Role="cliente" Type="Self.cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="direccion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="cliente">
+        <PropertyRef Name="IdDireccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dieta_Cliente">
+    <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+    <End Role="dieta" Type="Self.dieta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="dieta">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dieta_TipoAnimal">
+    <End Role="tipo_animal" Type="Self.tipo_animal" Multiplicity="1" />
+    <End Role="dieta" Type="Self.dieta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo_animal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="dieta">
+        <PropertyRef Name="IdTipoAnimal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DietaMateria_Dieta">
+    <End Role="dieta" Type="Self.dieta" Multiplicity="1" />
+    <End Role="dieta_materia" Type="Self.dieta_materia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dieta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="dieta_materia">
+        <PropertyRef Name="IdDieta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DietaMateria_Materia">
+    <End Role="materia_prima" Type="Self.materia_prima" Multiplicity="1" />
+    <End Role="dieta_materia" Type="Self.dieta_materia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="materia_prima">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="dieta_materia">
+        <PropertyRef Name="IdMateria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MateriaPrima_Cliente">
+    <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+    <End Role="materia_prima" Type="Self.materia_prima" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="materia_prima">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TipoAnimal_Necesidad">
+    <End Role="necesidad_fisiologica" Type="Self.necesidad_fisiologica" Multiplicity="1" />
+    <End Role="tipo_animal" Type="Self.tipo_animal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="necesidad_fisiologica">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tipo_animal">
+        <PropertyRef Name="IdNecesidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="sistema_dietaModelStoreContainer">
+    <EntitySet Name="cliente" EntityType="Self.cliente" Schema="sistema_dieta" store:Type="Tables" />
+    <EntitySet Name="dieta" EntityType="Self.dieta" Schema="sistema_dieta" store:Type="Tables" />
+    <EntitySet Name="direccion" EntityType="Self.direccion" Schema="sistema_dieta" store:Type="Tables" />
+    <EntitySet Name="materia_prima" EntityType="Self.materia_prima" Schema="sistema_dieta" store:Type="Tables" />
+    <EntitySet Name="necesidad_fisiologica" EntityType="Self.necesidad_fisiologica" Schema="sistema_dieta" store:Type="Tables" />
+    <EntitySet Name="tipo_animal" EntityType="Self.tipo_animal" Schema="sistema_dieta" store:Type="Tables" />
+    <EntitySet Name="dieta_materia" EntityType="Self.dieta_materia" store:Type="Tables" store:Schema="sistema_dieta">
+      <DefiningQuery>SELECT
+`dieta_materia`.`IdDieta`, 
+`dieta_materia`.`IdMateria`, 
+`dieta_materia`.`Cantidad`
+FROM `dieta_materia` AS `dieta_materia`</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Cliente_Direccion" Association="Self.FK_Cliente_Direccion">
+      <End Role="direccion" EntitySet="direccion" />
+      <End Role="cliente" EntitySet="cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dieta_Cliente" Association="Self.FK_Dieta_Cliente">
+      <End Role="cliente" EntitySet="cliente" />
+      <End Role="dieta" EntitySet="dieta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dieta_TipoAnimal" Association="Self.FK_Dieta_TipoAnimal">
+      <End Role="tipo_animal" EntitySet="tipo_animal" />
+      <End Role="dieta" EntitySet="dieta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DietaMateria_Dieta" Association="Self.FK_DietaMateria_Dieta">
+      <End Role="dieta" EntitySet="dieta" />
+      <End Role="dieta_materia" EntitySet="dieta_materia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DietaMateria_Materia" Association="Self.FK_DietaMateria_Materia">
+      <End Role="materia_prima" EntitySet="materia_prima" />
+      <End Role="dieta_materia" EntitySet="dieta_materia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MateriaPrima_Cliente" Association="Self.FK_MateriaPrima_Cliente">
+      <End Role="cliente" EntitySet="cliente" />
+      <End Role="materia_prima" EntitySet="materia_prima" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TipoAnimal_Necesidad" Association="Self.FK_TipoAnimal_Necesidad">
+      <End Role="necesidad_fisiologica" EntitySet="necesidad_fisiologica" />
+      <End Role="tipo_animal" EntitySet="tipo_animal" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

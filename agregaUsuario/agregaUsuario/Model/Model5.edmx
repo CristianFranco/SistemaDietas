@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="sistemadietasModel3.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdDireccion" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Telefono" />
+            <PropertyRef Name="Celular" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDireccion" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Celular" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dieta">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdTipoAnimal" />
+            <PropertyRef Name="FechaCreacion" />
+            <PropertyRef Name="FechaExpiracion" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="IdTipoAnimal" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="date" Nullable="false" />
+          <Property Name="FechaExpiracion" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dieta_materia">
+          <Key>
+            <PropertyRef Name="IdDieta" />
+            <PropertyRef Name="IdMateria" />
+            <PropertyRef Name="Cantidad" />
+          </Key>
+          <Property Name="IdDieta" Type="int" Nullable="false" />
+          <Property Name="IdMateria" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="direccion">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Direccion" />
+            <PropertyRef Name="Municipio" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="CP" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Municipio" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="CP" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="materia_prima">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ClaveServer" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="IsServerVersion" />
+            <PropertyRef Name="Fosforo" />
+            <PropertyRef Name="MateriaGrasa" />
+            <PropertyRef Name="CenizaBruta" />
+            <PropertyRef Name="FibraBruta" />
+            <PropertyRef Name="ProteinaBruta" />
+            <PropertyRef Name="MateriaSeca" />
+            <PropertyRef Name="FND" />
+            <PropertyRef Name="FAD" />
+            <PropertyRef Name="LAD" />
+            <PropertyRef Name="Calcio" />
+            <PropertyRef Name="ParedVegetal" />
+            <PropertyRef Name="Azuraces" />
+            <PropertyRef Name="CenizaInsoluble" />
+            <PropertyRef Name="Almidon" />
+            <PropertyRef Name="EnergiaBruta" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClaveServer" Type="int" Nullable="false" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsServerVersion" Type="bit" Nullable="false" />
+          <Property Name="Fosforo" Type="double" Nullable="false" />
+          <Property Name="MateriaGrasa" Type="double" Nullable="false" />
+          <Property Name="CenizaBruta" Type="double" Nullable="false" />
+          <Property Name="FibraBruta" Type="double" Nullable="false" />
+          <Property Name="ProteinaBruta" Type="double" Nullable="false" />
+          <Property Name="MateriaSeca" Type="double" Nullable="false" />
+          <Property Name="FND" Type="double" Nullable="false" />
+          <Property Name="FAD" Type="double" Nullable="false" />
+          <Property Name="LAD" Type="double" Nullable="false" />
+          <Property Name="Calcio" Type="double" Nullable="false" />
+          <Property Name="ParedVegetal" Type="double" Nullable="false" />
+          <Property Name="Azuraces" Type="double" Nullable="false" />
+          <Property Name="CenizaInsoluble" Type="double" Nullable="false" />
+          <Property Name="Almidon" Type="double" Nullable="false" />
+          <Property Name="EnergiaBruta" Type="double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="necesidadfisiologica">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ClaveServer" />
+            <PropertyRef Name="VitaminaD" />
+            <PropertyRef Name="VitaminaA" />
+            <PropertyRef Name="VitaminaE" />
+            <PropertyRef Name="P" />
+            <PropertyRef Name="EM" />
+            <PropertyRef Name="Ca" />
+            <PropertyRef Name="Na" />
+            <PropertyRef Name="Mg" />
+            <PropertyRef Name="PM" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClaveServer" Type="int" Nullable="false" />
+          <Property Name="VitaminaD" Type="double" Nullable="false" />
+          <Property Name="VitaminaA" Type="double" Nullable="false" />
+          <Property Name="VitaminaE" Type="double" Nullable="false" />
+          <Property Name="P" Type="double" Nullable="false" />
+          <Property Name="EM" Type="double" Nullable="false" />
+          <Property Name="Ca" Type="double" Nullable="false" />
+          <Property Name="Na" Type="double" Nullable="false" />
+          <Property Name="Mg" Type="double" Nullable="false" />
+          <Property Name="PM" Type="double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipoanimal">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Peso" />
+            <PropertyRef Name="IdNecesidad" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Peso" Type="double" Nullable="false" />
+          <Property Name="IdNecesidad" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Cliente_Direccion' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Cliente_Direccion" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Dieta_Cliente' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Dieta_Cliente" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Dieta_TipoAnimal' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Dieta_TipoAnimal" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_DietaMateria_Dieta' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_DietaMateria_Dieta" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_DietaMateria_Materia' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_DietaMateria_Materia" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Materia_Prima_Cliente' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Materia_Prima_Cliente" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_TipoAnimal_Necesidad' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_TipoAnimal_Necesidad" />-->
+        <EntityContainer Name="sistemadietasModel3StoreContainer">
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="sistemadietas" store:Type="Tables" />
+          <EntitySet Name="dieta" EntityType="Self.dieta" Schema="sistemadietas" store:Type="Tables" />
+          <EntitySet Name="dieta_materia" EntityType="Self.dieta_materia" Schema="sistemadietas" store:Type="Tables" />
+          <EntitySet Name="direccion" EntityType="Self.direccion" Schema="sistemadietas" store:Type="Tables" />
+          <EntitySet Name="materia_prima" EntityType="Self.materia_prima" Schema="sistemadietas" store:Type="Tables" />
+          <EntitySet Name="necesidadfisiologica" EntityType="Self.necesidadfisiologica" Schema="sistemadietas" store:Type="Tables" />
+          <EntitySet Name="tipoanimal" EntityType="Self.tipoanimal" Schema="sistemadietas" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sistemadietasModel3" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdDireccion" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Telefono" />
+            <PropertyRef Name="Celular" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDireccion" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Celular" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dieta">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdTipoAnimal" />
+            <PropertyRef Name="FechaCreacion" />
+            <PropertyRef Name="FechaExpiracion" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoAnimal" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" />
+          <Property Name="FechaExpiracion" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dieta_materia">
+          <Key>
+            <PropertyRef Name="IdDieta" />
+            <PropertyRef Name="IdMateria" />
+            <PropertyRef Name="Cantidad" />
+          </Key>
+          <Property Name="IdDieta" Type="Int32" Nullable="false" />
+          <Property Name="IdMateria" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="direccion">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Direccion1" />
+            <PropertyRef Name="Municipio" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="CP" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Direccion1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Municipio" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CP" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="materia_prima">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ClaveServer" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="IsServerVersion" />
+            <PropertyRef Name="Fosforo" />
+            <PropertyRef Name="MateriaGrasa" />
+            <PropertyRef Name="CenizaBruta" />
+            <PropertyRef Name="FibraBruta" />
+            <PropertyRef Name="ProteinaBruta" />
+            <PropertyRef Name="MateriaSeca" />
+            <PropertyRef Name="FND" />
+            <PropertyRef Name="FAD" />
+            <PropertyRef Name="LAD" />
+            <PropertyRef Name="Calcio" />
+            <PropertyRef Name="ParedVegetal" />
+            <PropertyRef Name="Azuraces" />
+            <PropertyRef Name="CenizaInsoluble" />
+            <PropertyRef Name="Almidon" />
+            <PropertyRef Name="EnergiaBruta" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClaveServer" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsServerVersion" Type="Boolean" Nullable="false" />
+          <Property Name="Fosforo" Type="Double" Nullable="false" />
+          <Property Name="MateriaGrasa" Type="Double" Nullable="false" />
+          <Property Name="CenizaBruta" Type="Double" Nullable="false" />
+          <Property Name="FibraBruta" Type="Double" Nullable="false" />
+          <Property Name="ProteinaBruta" Type="Double" Nullable="false" />
+          <Property Name="MateriaSeca" Type="Double" Nullable="false" />
+          <Property Name="FND" Type="Double" Nullable="false" />
+          <Property Name="FAD" Type="Double" Nullable="false" />
+          <Property Name="LAD" Type="Double" Nullable="false" />
+          <Property Name="Calcio" Type="Double" Nullable="false" />
+          <Property Name="ParedVegetal" Type="Double" Nullable="false" />
+          <Property Name="Azuraces" Type="Double" Nullable="false" />
+          <Property Name="CenizaInsoluble" Type="Double" Nullable="false" />
+          <Property Name="Almidon" Type="Double" Nullable="false" />
+          <Property Name="EnergiaBruta" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="necesidadfisiologica">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ClaveServer" />
+            <PropertyRef Name="VitaminaD" />
+            <PropertyRef Name="VitaminaA" />
+            <PropertyRef Name="VitaminaE" />
+            <PropertyRef Name="P" />
+            <PropertyRef Name="EM" />
+            <PropertyRef Name="Ca" />
+            <PropertyRef Name="Na" />
+            <PropertyRef Name="Mg" />
+            <PropertyRef Name="PM" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClaveServer" Type="Int32" Nullable="false" />
+          <Property Name="VitaminaD" Type="Double" Nullable="false" />
+          <Property Name="VitaminaA" Type="Double" Nullable="false" />
+          <Property Name="VitaminaE" Type="Double" Nullable="false" />
+          <Property Name="P" Type="Double" Nullable="false" />
+          <Property Name="EM" Type="Double" Nullable="false" />
+          <Property Name="Ca" Type="Double" Nullable="false" />
+          <Property Name="Na" Type="Double" Nullable="false" />
+          <Property Name="Mg" Type="Double" Nullable="false" />
+          <Property Name="PM" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipoanimal">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Peso" />
+            <PropertyRef Name="IdNecesidad" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Peso" Type="Double" Nullable="false" />
+          <Property Name="IdNecesidad" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="sistemadietasEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="clientes" EntityType="Self.cliente" />
+          <EntitySet Name="dietas" EntityType="Self.dieta" />
+          <EntitySet Name="dieta_materia" EntityType="Self.dieta_materia" />
+          <EntitySet Name="direccions" EntityType="Self.direccion" />
+          <EntitySet Name="materia_prima" EntityType="Self.materia_prima" />
+          <EntitySet Name="necesidadfisiologicas" EntityType="Self.necesidadfisiologica" />
+          <EntitySet Name="tipoanimals" EntityType="Self.tipoanimal" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="sistemadietasModel3StoreContainer" CdmEntityContainer="sistemadietasEntities3">
+          <EntitySetMapping Name="clientes">
+            <EntityTypeMapping TypeName="sistemadietasModel3.cliente">
+              <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdDireccion" ColumnName="IdDireccion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dietas">
+            <EntityTypeMapping TypeName="sistemadietasModel3.dieta">
+              <MappingFragment StoreEntitySet="dieta">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdTipoAnimal" ColumnName="IdTipoAnimal" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaExpiracion" ColumnName="FechaExpiracion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dieta_materia">
+            <EntityTypeMapping TypeName="sistemadietasModel3.dieta_materia">
+              <MappingFragment StoreEntitySet="dieta_materia">
+                <ScalarProperty Name="IdDieta" ColumnName="IdDieta" />
+                <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="direccions">
+            <EntityTypeMapping TypeName="sistemadietasModel3.direccion">
+              <MappingFragment StoreEntitySet="direccion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Direccion1" ColumnName="Direccion" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CP" ColumnName="CP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materia_prima">
+            <EntityTypeMapping TypeName="sistemadietasModel3.materia_prima">
+              <MappingFragment StoreEntitySet="materia_prima">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClaveServer" ColumnName="ClaveServer" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IsServerVersion" ColumnName="IsServerVersion" />
+                <ScalarProperty Name="Fosforo" ColumnName="Fosforo" />
+                <ScalarProperty Name="MateriaGrasa" ColumnName="MateriaGrasa" />
+                <ScalarProperty Name="CenizaBruta" ColumnName="CenizaBruta" />
+                <ScalarProperty Name="FibraBruta" ColumnName="FibraBruta" />
+                <ScalarProperty Name="ProteinaBruta" ColumnName="ProteinaBruta" />
+                <ScalarProperty Name="MateriaSeca" ColumnName="MateriaSeca" />
+                <ScalarProperty Name="FND" ColumnName="FND" />
+                <ScalarProperty Name="FAD" ColumnName="FAD" />
+                <ScalarProperty Name="LAD" ColumnName="LAD" />
+                <ScalarProperty Name="Calcio" ColumnName="Calcio" />
+                <ScalarProperty Name="ParedVegetal" ColumnName="ParedVegetal" />
+                <ScalarProperty Name="Azuraces" ColumnName="Azuraces" />
+                <ScalarProperty Name="CenizaInsoluble" ColumnName="CenizaInsoluble" />
+                <ScalarProperty Name="Almidon" ColumnName="Almidon" />
+                <ScalarProperty Name="EnergiaBruta" ColumnName="EnergiaBruta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="necesidadfisiologicas">
+            <EntityTypeMapping TypeName="sistemadietasModel3.necesidadfisiologica">
+              <MappingFragment StoreEntitySet="necesidadfisiologica">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClaveServer" ColumnName="ClaveServer" />
+                <ScalarProperty Name="VitaminaD" ColumnName="VitaminaD" />
+                <ScalarProperty Name="VitaminaA" ColumnName="VitaminaA" />
+                <ScalarProperty Name="VitaminaE" ColumnName="VitaminaE" />
+                <ScalarProperty Name="P" ColumnName="P" />
+                <ScalarProperty Name="EM" ColumnName="EM" />
+                <ScalarProperty Name="Ca" ColumnName="Ca" />
+                <ScalarProperty Name="Na" ColumnName="Na" />
+                <ScalarProperty Name="Mg" ColumnName="Mg" />
+                <ScalarProperty Name="PM" ColumnName="PM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipoanimals">
+            <EntityTypeMapping TypeName="sistemadietasModel3.tipoanimal">
+              <MappingFragment StoreEntitySet="tipoanimal">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="IdNecesidad" ColumnName="IdNecesidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
